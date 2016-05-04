@@ -1,6 +1,6 @@
 <?php
 
-abstract class Database extends PDO
+class Database extends PDO
 {
 	private $dns     = 'mysql:host=localhost;dbname=h3s7s_secfatec;';//dns na sequencia, driver, host, banco de dados
 	private $user    = 'root';//usuário do banco de dados
@@ -19,12 +19,13 @@ abstract class Database extends PDO
 		}
 		catch(PDOException $e) 
 		{
-			return json_encode([
+			echo json_encode([
 								"message" => $e->getMessage(), 
 								"code" => $e->getCode(), 
 								"file" => $e->getFile(), 
 								"lineError" => $e->getLine()
 							]);
+			return FALSE;
 		}
 	}
 }
