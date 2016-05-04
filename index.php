@@ -42,7 +42,7 @@
 	      <ul class="nav navbar-nav">
 	        <li class="active"><a href="index.html">Mapa de Casos</a></li>
 	        <li><a href="dicas.html">Dicas</a></li>
-	        <li><a href="noticias.html">Notícias</a></li>
+	        <li><a href="noticias.php">Notícias</a></li>
 	      </ul>
 	      
 	      <ul class="nav navbar-nav navbar-right">

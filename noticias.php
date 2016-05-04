@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8">
+    <meta charset="utf8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     
@@ -56,7 +56,7 @@
     <div class="space-sm"></div>
     
     <div class="text-justify">
-        
+
         <h3>Notícias</h3></br>
     
         <h4>Notícias 1</h4>
