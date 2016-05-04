@@ -1,0 +1,8 @@
+.space-xs{clear:both; width:100%; height:7px;}
+.space-sm{clear:both; width:100%; height:15px;}
+.space-md{clear:both; width:100%; height:25px;}
+.space-lg{clear:both; width:100%; height:50px;}
+
+html, body { height: 100%; margin: 0; padding: 0; }
+#map { height: 100%; }
+
