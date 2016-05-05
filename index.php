@@ -1,5 +1,5 @@
 <?php
-	require_once('core/Template.php');
+	require_once(dirname(__FILE__) . '/core/autoload.php');
 	$template = new Template();
 	$template->getInc('header');
 	$template->getInc('menu');
@@ -21,6 +21,9 @@
 				break;
 			case 'sobre':
 					$template->getPage('sobre');
+				break;
+			case 'contato':
+					$template->getPage('contato');
 				break;
 			default:
 					$template->getPage('mapa');

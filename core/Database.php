@@ -13,7 +13,7 @@ class Database extends PDO
 		{
 			parent::__construct($this->dns,$this->user,$this->pass,$this->charset);
 			parent::setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-			parent::setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_OBJ);
+			parent::setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
 
 			return TRUE;
 		}

@@ -17,19 +17,37 @@
             
 			<form>
 			  <div class="form-group">
-			    <label for="txnome">Seu nome:</label>
-			    <input type="text" class="form-control" id="txnome" placeholder="">
+			    <label for="txnome">Nome:</label>
+			    <input type="text" class="form-control" id="txnome" placeholder="Nome completo">
 			  </div>
 			  <div class="form-group">
-			    <label for="txmail">Seu e-mail:</label>
-			    <input type="email" class="form-control" id="txmail" placeholder="">
+			    <label for="txmail">E-mail:</label>
+			    <input type="email" class="form-control" id="txmail" placeholder="exemplo@email.com">
 			  </div>
+			  <!--	Inclusão de dados adicionais -->
 			  <div class="form-group">
-			    <label for="txdenuncia">Sua denuncia:</label>
-			    <textarea class="form-control" id="txdenuncia" rows="5"></textarea>
+			    <label for="txphone">Telefone:</label>
+			    <input type="text" class="form-control" id="txphone" placeholder="(99) 98765 - 4321">
 			  </div>
-			  <a id="btn-enviar" data-coordenadas="" class="btn btn-primary">Enviar</a>
-			  <a id="btn-cancelar" class="btn btn-default">Cancelar</a>
+
+			  <div class="form-group">
+			    <label for="txrg">RG:</label>
+			    <input type="text" class="form-control" id="txrg" placeholder="23.456.789 - X">
+			  </div>
+			
+			  <div class="form-group">
+			    <label for="txcpf">CPF:</label>
+			    <input type="text" class="form-control" id="txcpf" placeholder="123.456.789 - 00">
+			  </div>
+			
+			  <!-- fim -->
+
+			  <div class="form-group">
+			    <label for="txdenuncia">Denuncia:</label>
+			    <textarea class="form-control" id="txdenuncia" rows="5" placeholder="Detalhes da denuncia"></textarea>
+			  </div>
+			  	<a id="btn-enviar" data-coordenadas="" class="btn btn-primary">Enviar</a>
+			  	<a id="btn-cancelar" class="btn btn-default">Cancelar</a>
 			</form>
 
         </div>
