@@ -23,6 +23,9 @@ require_once(dirname(dirname(__FILE__)) . '/core/autoload.php');
 
 				break;
 			case 'SetPoints':
+					$db = new Database();
+					$query = $db->prepare("");//vale um insert ;P
+					$query->execute();
 				break;
 			default:
 					echo json_encode(['error' => 'Ação não encontrada. :(']);
