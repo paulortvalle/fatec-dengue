@@ -4,97 +4,9 @@
         lng: -46.950374
     };
 
-    var neighborhoods = [{
-        posicao: {
-            lat: -22.424856,
-            lng: -46.9503745
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.359745,
-            lng: -46.955618
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.311793,
-            lng: -46.961969
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.361809,
-            lng: -46.934332
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.364111,
-            lng: -46.933817
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.346914,
-            lng: -46.924453
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.380370,
-            lng: -46.934921
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.382116,
-            lng: -46.932947
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.405837,
-            lng: -46.945022
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.465020,
-            lng: -46.977466
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.465020,
-            lng: -46.977466
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.402185,
-            lng: -46.985534
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.442333,
-            lng: -46.935409
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.416112,
-            lng: -46.956995
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.407481,
-            lng: -46.945629
-        },
-        denuncia: 'A casa ao lado tem vários pneus abandonados!<br/>Vocês podem verificar?'
-    }, ];
+    var ultima = { lat: 0, lng: 0, denuncia:'mais alguma coisa'};
+
+    var neighborhoods = [{}];
 
     var denguemap = {
         fatec: {
@@ -147,16 +59,8 @@
                 radius: Math.sqrt(denguemap[foco].area) * 10
             });
         }
-
+        GetAllPoints();
         drop();
-
-        /*
-        var infowindow = new google.maps.InfoWindow({
-            content: 'Change the zoom level',
-            position: myLatLng
-        });
-        infowindow.open(map);
-        */
 
         google.maps.event.addListener(map, 'click', function(event) {
             mostraModal(event.latLng);
@@ -167,16 +71,16 @@
     }
 
     function drop() {
-        clearMarkers();
         for (var i = 0; i < neighborhoods.length; i++) {
             addMarkerWithTimeout(neighborhoods[i], i * 800);
+            ultima = neighborhoods[i];
         }
     }
 
     function addMarkerWithTimeout(elemento, timeout) {
         window.setTimeout(function() {
             markers.push(new google.maps.Marker({
-                position: elemento.posicao,
+                position: {'lat': parseFloat(elemento.lat), 'lng' : parseFloat(elemento.lng)},
                 map: map,
                 animation: google.maps.Animation.DROP,
                 icon: imagem,
@@ -235,6 +139,40 @@
  }
 
 
+function GetLastPoint() {
+    $.ajax({
+        type: 'POST',
+        url: 'sys/Denuncias.php',
+        data: {
+            action: 'GetLastPoint'
+        },
+        datatype: JSON,
+        success: function(resultado) {
+            resultado = JSON.parse(resultado);
+            if (resultado.lat !== ultima.lat) {
+                addMarkerWithTimeout(resultado, 800);
+                ultima = resultado;
+            }
+        }
+    });
+}
+
+function GetAllPoints() {
+    $.ajax({
+        type: 'POST',
+        url: 'sys/Denuncias.php',
+        data: {
+            action: 'GetAllPoints'
+        },
+        datatype: JSON,
+        success: function(geral) {
+            neighborhoods = JSON.parse(geral);
+            drop();
+        }
+    });
+}
+
+
 $(function() {
 
         dimensionamodal();
@@ -270,7 +208,5 @@ $(function() {
             return false;
 
         });
-
-
 
     }) // final do load

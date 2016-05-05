@@ -53,3 +53,6 @@
         </div>
     </div>
 </div>
+<script type="text/javascript">
+	setInterval(GetLastPoint, 2000);
+</script>
