@@ -23,7 +23,4 @@ require_once(dirname(dirname(__FILE__)) . '/core/autoload.php');
 				break;
 		}
 	}
-
-
-	$template = new Template();
 ?>

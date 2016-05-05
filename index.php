@@ -22,6 +22,9 @@
 			case 'sobre':
 					$template->getPage('sobre');
 				break;
+			case 'contato':
+					$template->getPage('contato');
+				break;
 			default:
 					$template->getPage('mapa');
 				break;
