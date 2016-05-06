@@ -1,0 +1,19 @@
+
+CREATE TABLE `reclamacoes` (
+  `id_rec` int(11) NOT NULL,
+  `nome` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `rg` varchar(9) NOT NULL,
+  `cpf` varchar(11) NOT NULL,
+  `telefone` varchar(10) NOT NULL,
+  `lat` varchar(15) NOT NULL,
+  `lng` varchar(15) NOT NULL,
+  `denuncia` longtext NOT NULL,
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
+) ;
+
+ALTER TABLE `reclamacoes`
+  ADD PRIMARY KEY (`id_rec`),
+  ADD UNIQUE KEY `email` (`email`),
+  ADD UNIQUE KEY `rg` (`rg`),
+  ADD UNIQUE KEY `cpf` (`cpf`);

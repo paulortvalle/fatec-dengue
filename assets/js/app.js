@@ -194,7 +194,7 @@
                 fechaModal();
                 return false;
             });
-
+            
             // chamada do botão de cadastro de novo associado
             $('#btn-enviar').on('click', function() {
 
