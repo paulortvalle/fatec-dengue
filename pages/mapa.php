@@ -15,39 +15,40 @@
         <div class="space-sm"></div>
         <div class="col-xs-12">
             
-			<form>
+			<form id="cad" method="POST">
 			  <div class="form-group">
 			    <label for="txnome">Nome:</label>
-			    <input type="text" class="form-control" id="txnome" placeholder="Nome completo">
+			    <input type="text" name="nome" class="form-control" id="txnome" placeholder="Nome completo"/>
 			  </div>
 			  <div class="form-group">
 			    <label for="txmail">E-mail:</label>
-			    <input type="email" class="form-control" id="txmail" placeholder="exemplo@email.com">
+			    <input type="email" name="email" class="form-control" id="txmail" placeholder="exemplo@email.com"/>
 			  </div>
 			  <!--	Inclusão de dados adicionais -->
 			  <div class="form-group">
 			    <label for="txphone">Telefone:</label>
-			    <input type="text" class="form-control" id="txphone" placeholder="(99) 98765 - 4321">
+			    <input type="text" name="telefone" class="form-control" id="txphone" placeholder="(99) 98765 - 4321"/>
 			  </div>
 
 			  <div class="form-group">
 			    <label for="txrg">RG:</label>
-			    <input type="text" class="form-control" id="txrg" placeholder="23.456.789 - X">
+			    <input type="text" name="rg" class="form-control" id="txrg" placeholder="23.456.789 - X"/>
 			  </div>
 			
 			  <div class="form-group">
 			    <label for="txcpf">CPF:</label>
-			    <input type="text" class="form-control" id="txcpf" placeholder="123.456.789 - 00">
+			    <input type="text" name="cpf" class="form-control" id="txcpf" placeholder="123.456.789 - 00"/>
 			  </div>
 			
 			  <!-- fim -->
 
 			  <div class="form-group">
 			    <label for="txdenuncia">Denuncia:</label>
-			    <textarea class="form-control" id="txdenuncia" rows="5" placeholder="Detalhes da denuncia"></textarea>
+			    <textarea class="form-control" name="denuncia" id="txdenuncia" rows="5" placeholder="Detalhes da denuncia"></textarea>
 			  </div>
-			  	<a id="btn-enviar" data-coordenadas="" class="btn btn-primary">Enviar</a>
-			  	<a id="btn-cancelar" class="btn btn-default">Cancelar</a>
+			  	<input id="btn-enviar" data-coordenadas="" value="Denunciar!" class="btn btn-primary" type="submit"/>
+			  	<input type="hidden" name="action" value="SetPoints"/>
+			  	<input id="btn-cancelar" value="Cancelar" class="btn btn-default" type="button"/>
 			</form>
 
         </div>
