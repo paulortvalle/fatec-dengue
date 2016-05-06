@@ -2,7 +2,7 @@
 
 class Database extends PDO
 {
-	private $dns     = 'mysql:host=localhost;dbname=h3s7s_secfatec;';//dns na sequencia, driver, host, banco de dados
+	private $dns     = 'mysql:host=localhost;dbname=teste;';//dns na sequencia, driver, host, banco de dados
 	private $user    = 'root';//usuário do banco de dados
 	private $pass    = '';//senha do banco de dados
     private $charset = [PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'];//evitando erros de acentuação

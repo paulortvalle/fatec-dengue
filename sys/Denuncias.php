@@ -12,16 +12,23 @@ require_once(dirname(dirname(__FILE__)) . '/core/autoload.php');
 					$db = new Database();
 					$query = $db->prepare("SELECT lat, lng, denuncia FROM reclamacoes ORDER BY id_rec DESC LIMIT 1");
 					$query->execute();
-					echo json_encode($query->fetch(PDO::FETCH_ASSOC));
+					
+					if($query->rowCount())
+						echo json_encode($query->fetch(PDO::FETCH_ASSOC));
+					else
+						echo json_encode([]);
 				break;
-				
+
 			case 'GetAllPoints':
 
 					$db = new Database();
 					$query = $db->prepare("SELECT lat, lng, denuncia FROM reclamacoes");
 					$query->execute();
 					
-					echo json_encode($query->fetchAll(PDO::FETCH_ASSOC));
+					if($query->rowCount())
+						echo json_encode($query->fetchAll(PDO::FETCH_ASSOC));
+					else
+						echo json_encode([[]]);
 				break;
 			case 'SetPoints':
 					
