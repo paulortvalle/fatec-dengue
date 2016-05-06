@@ -14,6 +14,7 @@ require_once(dirname(dirname(__FILE__)) . '/core/autoload.php');
 					$query->execute();
 					echo json_encode($query->fetch(PDO::FETCH_ASSOC));
 				break;
+				
 			case 'GetAllPoints':
 
 					$db = new Database();
@@ -56,7 +57,6 @@ require_once(dirname(dirname(__FILE__)) . '/core/autoload.php');
 						echo json_encode(['error' => 'Falha ao Cadastrar']);
 					}
 					
-					print_r($_POST);
 				break;
 			default:
 					echo json_encode(['error' => 'Ação não encontrada. :(']);

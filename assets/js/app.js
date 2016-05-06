@@ -220,7 +220,8 @@
                     datatype: JSON,
                     success: function(sucesso) {
                         console.log(sucesso);
-                    },error: function(){
+                    },
+                    error: function() {
 
                     }
                 });
