@@ -11,9 +11,7 @@
         echo $template->getCss('theme', 'all');
         echo $template->getJS('jquery-2.1.1.min');
         echo $template->getJS('bootstrap.min');
-        echo $template->getJS('jquery.form-20140218.min');
         echo $template->getJS('script20160430');
-        echo $template->getJS('jquery.validate.min');
         echo $template->getJS('app');
     ?>
     <title>DEV DAY 2016</title>

@@ -57,7 +57,7 @@ require_once(dirname(dirname(__FILE__)) . '/core/autoload.php');
 					
 					if ($query->rowCount() > 0) 
 					{
-						echo 'foi';
+						echo json_encode(['message'=>'A denuncia foi registrada com sucesso!']);
 					}
 					else
 					{

@@ -52,7 +52,7 @@
             zoom: 12,
             //mapTypeId: google.maps.MapTypeId.TERRAIN
         });
-
+        /*
         for (var foco in denguemap) {
             var cityCircle = new google.maps.Circle({
                 strokeColor: '#FF0000',
@@ -65,6 +65,7 @@
                 radius: Math.sqrt(denguemap[foco].area) * 10
             });
         }
+        */
         GetAllPoints();
         drop();
 
@@ -196,9 +197,10 @@
             });
             
             // chamada do botão de cadastro de novo associado
-            $('#btn-enviar').on('click', function() {
+            $('form').on('submit', function(e) {
+                e.preventDefault();
 
-                var coord = $(this).data('coordenadas');
+                var coord = $('#btn-enviar').data('coordenadas');
 
                 var markerIn = new google.maps.Marker({
                     position: coord,
@@ -216,12 +218,10 @@
                 $.ajax({
                     type: 'POST',
                     url: 'sys/Denuncias.php',
-                    data: $('form').serialize(),
+                    data: $(this).serialize(),
                     datatype: JSON,
                     success: function(sucesso) {
-                    },
-                    error: function() {
-
+                        sucesso = JSON.parse(sucesso);
                     }
                 });
 
@@ -231,10 +231,8 @@
                 });
 
 
-                fechaModal();
-
-                return false;
-
+                    setTimeout(fechaModal, 1500);
+                    return false;
             });
 
         }) // final do load
