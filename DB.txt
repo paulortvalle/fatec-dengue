@@ -13,4 +13,4 @@ CREATE TABLE `reclamacoes` (
   UNIQUE KEY `email` (`email`),
   UNIQUE KEY `rg` (`rg`),
   UNIQUE KEY `cpf` (`cpf`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
