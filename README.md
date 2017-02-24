@@ -4,3 +4,4 @@ Desenvolvido no Fatec DevDay de 2016, realizado da Faculdade de Tecnologia de Mo
 Classificação do Projeto no Hackathon: 6º Colocado
 
 # Agradecimentos Especiais
+Alunos de ADS FATEC Mogi Mirim - SP
