@@ -4,97 +4,13 @@
         lng: -46.950374
     };
 
-    var neighborhoods = [{
-        posicao: {
-            lat: -22.424856,
-            lng: -46.9503745
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.359745,
-            lng: -46.955618
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.311793,
-            lng: -46.961969
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.361809,
-            lng: -46.934332
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.364111,
-            lng: -46.933817
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.346914,
-            lng: -46.924453
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.380370,
-            lng: -46.934921
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.382116,
-            lng: -46.932947
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.405837,
-            lng: -46.945022
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.465020,
-            lng: -46.977466
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.465020,
-            lng: -46.977466
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.402185,
-            lng: -46.985534
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.442333,
-            lng: -46.935409
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.416112,
-            lng: -46.956995
-        },
-        denuncia: 'aqui tem varios focos de dengue'
-    }, {
-        posicao: {
-            lat: -22.407481,
-            lng: -46.945629
-        },
-        denuncia: 'A casa ao lado tem vários pneus abandonados!<br/>Vocês podem verificar?'
-    }, ];
+    var ultima = {
+        lat: 0,
+        lng: 0,
+        denuncia: 'mais alguma coisa'
+    };
+
+    var neighborhoods = [{}];
 
     var denguemap = {
         fatec: {
@@ -128,13 +44,15 @@
 
     var infowindow = null;
 
+    var posicao_click = null;
+
     function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
             center: myLatLng,
             zoom: 12,
             //mapTypeId: google.maps.MapTypeId.TERRAIN
         });
-
+        /*
         for (var foco in denguemap) {
             var cityCircle = new google.maps.Circle({
                 strokeColor: '#FF0000',
@@ -147,18 +65,12 @@
                 radius: Math.sqrt(denguemap[foco].area) * 10
             });
         }
-
+        */
+        GetAllPoints();
         drop();
 
-        /*
-        var infowindow = new google.maps.InfoWindow({
-            content: 'Change the zoom level',
-            position: myLatLng
-        });
-        infowindow.open(map);
-        */
-
         google.maps.event.addListener(map, 'click', function(event) {
+            posicao_click = event.latLng.toJSON();
             mostraModal(event.latLng);
         });
 
@@ -167,16 +79,19 @@
     }
 
     function drop() {
-        clearMarkers();
         for (var i = 0; i < neighborhoods.length; i++) {
             addMarkerWithTimeout(neighborhoods[i], i * 800);
+            ultima = neighborhoods[i];
         }
     }
 
     function addMarkerWithTimeout(elemento, timeout) {
         window.setTimeout(function() {
             markers.push(new google.maps.Marker({
-                position: elemento.posicao,
+                position: {
+                    'lat': parseFloat(elemento.lat),
+                    'lng': parseFloat(elemento.lng)
+                },
                 map: map,
                 animation: google.maps.Animation.DROP,
                 icon: imagem,
@@ -208,69 +123,116 @@
         }
     }
 
- function dimensionamodal() {
-     var telah = $(window).height();
-     var telaw = $(window).width();
+    function dimensionamodal() {
+        var telah = $(window).height();
+        var telaw = $(window).width();
 
-     var janelah = $('.modalinfo').height();
-     var janelaw = $('.modalinfo').width();
+        var janelah = $('.modalinfo').height();
+        var janelaw = $('.modalinfo').width();
 
-     var topjanela = (telah * 0.5) - (janelah * 0.5) - 20;
-     var leftjanela = (telaw * 0.5) - (janelaw * 0.5) - 20;
+        var topjanela = (telah * 0.5) - (janelah * 0.5) - 20;
+        var leftjanela = (telaw * 0.5) - (janelaw * 0.5) - 20;
 
-     $('.modalinfo').css('top', topjanela).css('left', leftjanela);
- }
+        $('.modalinfo').css('top', topjanela).css('left', leftjanela);
+    }
 
- function mostraModal($coordenadas) {
-     dimensionamodal();
-     $('.modalinfo').fadeIn(800);
-     $('.backg').slideDown(200);
-     $('#btn-enviar').data('coordenadas', $coordenadas);
- }
-
- function fechaModal() {
-     $('.modalinfo').fadeOut(600);
-     $('.backg').slideUp(200);
-     $('.has-error input').focus();
- }
-
-
-$(function() {
-
+    function mostraModal($coordenadas) {
         dimensionamodal();
-        $(window).resize(function() {
-            dimensionamodal()
+        $('.modalinfo').fadeIn(800);
+        $('.backg').slideDown(200);
+        $('#btn-enviar').data('coordenadas', $coordenadas);
+    }
+
+    function fechaModal() {
+        $('.modalinfo').fadeOut(600);
+        $('.backg').slideUp(200);
+        $('.has-error input').focus();
+    }
+
+
+    function GetLastPoint() {
+        $.ajax({
+            type: 'POST',
+            url: 'sys/Denuncias.php',
+            data: {
+                action: 'GetLastPoint'
+            },
+            datatype: JSON,
+            success: function(resultado) {
+                resultado = JSON.parse(resultado);
+                if (resultado.lat !== ultima.lat) {
+                    addMarkerWithTimeout(resultado, 800);
+                    ultima = resultado;
+                }
+            }
         });
+    }
 
-        $('.backg, #btn-cancelar').on('click', function() {
-            fechaModal();
-            return false;
+    function GetAllPoints() {
+        $.ajax({
+            type: 'POST',
+            url: 'sys/Denuncias.php',
+            data: {
+                action: 'GetAllPoints'
+            },
+            datatype: JSON,
+            success: function(geral) {
+                neighborhoods = JSON.parse(geral);
+                drop();
+            }
         });
+    }
 
-        // chamada do botão de cadastro de novo associado
-        $('#btn-enviar').on('click', function() {
 
-            var coord = $(this).data('coordenadas');
+    $(function() {
 
-            var markerIn = new google.maps.Marker({
-                position: coord,
-                map: map,
-                animation: google.maps.Animation.DROP,
-                icon: imagem,
-                title: $('#txdenuncia').val()
+            dimensionamodal();
+            $(window).resize(function() {
+                dimensionamodal()
             });
 
-            google.maps.event.addListener(markerIn, 'click', function() {
-                infowindow.setContent('<h3>' + markerIn.title + '</h3><i class="btn btn-primary fa fa-thumbs-up" aria-hidden="true"></i><div class="space-sm"></div>');
-                infowindow.open(map, this);
+            $('.backg, #btn-cancelar').on('click', function() {
+                fechaModal();
+                return false;
+            });
+            
+            // chamada do botão de cadastro de novo associado
+            $('form').on('submit', function(e) {
+                e.preventDefault();
+
+                var coord = $('#btn-enviar').data('coordenadas');
+
+                var markerIn = new google.maps.Marker({
+                    position: coord,
+                    map: map,
+                    animation: google.maps.Animation.DROP,
+                    icon: imagem,
+                    title: $('#txdenuncia').val()
+                });
+
+                $('input#btn-enviar').append('<input type="hidden" name="lat"/>');
+                $('input#btn-enviar').append('<input type="hidden" name="lng"/>');
+                $('input[name="lat"]').val(coord.lat());
+                $('input[name="lng"]').val(coord.lng());
+
+                $.ajax({
+                    type: 'POST',
+                    url: 'sys/Denuncias.php',
+                    data: $(this).serialize(),
+                    datatype: JSON,
+                    success: function(sucesso) {
+                        sucesso = JSON.parse(sucesso);
+                    }
+                });
+
+                google.maps.event.addListener(markerIn, 'click', function() {
+                    infowindow.setContent('<h3>' + markerIn.title + '</h3><i class="btn btn-primary fa fa-thumbs-up" aria-hidden="true"></i><div class="space-sm"></div>');
+                    infowindow.open(map, this);
+                });
+
+
+                    setTimeout(fechaModal, 1500);
+                    return false;
             });
 
-            fechaModal();
-
-            return false;
-
-        });
-
-
-
-    }) // final do load
+        }) // final do load

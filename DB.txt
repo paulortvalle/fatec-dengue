@@ -1,0 +1,16 @@
+CREATE TABLE `reclamacoes` (
+  `id_rec` int(11) NOT NULL AUTO_INCREMENT,
+  `nome` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `rg` varchar(9) NOT NULL,
+  `cpf` varchar(11) NOT NULL,
+  `telefone` varchar(10) NOT NULL,
+  `lat` varchar(12) NOT NULL,
+  `lng` varchar(12) NOT NULL,
+  `denuncia` longtext NOT NULL,
+  `time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id_rec`),
+  UNIQUE KEY `email` (`email`),
+  UNIQUE KEY `rg` (`rg`),
+  UNIQUE KEY `cpf` (`cpf`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
